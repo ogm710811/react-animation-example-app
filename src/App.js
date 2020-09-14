@@ -80,16 +80,8 @@ class App extends Component {
             </div>
           )}
         </Transition>
-
-        <Transition
-          mountOnEnter
-          unmountOnExit
-          in={this.state.isModalOpen}
-          timeout={this.duration}
-        >
-          {(state) => <Modal show={state} closed={this.closeModalHandler} />}
-        </Transition>
-
+        {/*The Modal Component with Transition Component will be always present in App.js no need to apply condition here*/}
+        <Modal show={this.state.isModalOpen} closed={this.closeModalHandler} />
         {this.state.isModalOpen ? (
           <Backdrop show={this.state.isModalOpen} />
         ) : null}
