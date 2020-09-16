@@ -3,6 +3,7 @@ import { Transition } from "react-transition-group";
 
 import "./App.css";
 import Modal from "./components/Modal/Modal";
+import ModalCSSTransition from "./components/Modal-CSSTransition/Modal-CSSTransition";
 import Backdrop from "./components/Backdrop/Backdrop";
 import List from "./components/List/List";
 
@@ -21,19 +22,32 @@ class App extends Component {
 
   state = {
     isModalOpen: false,
+    isModalCSSTransOpen: false,
     openContainer: false,
   };
 
   showModalHandler = () => {
     this.setState({
-      isModalOpen: true,
-    });
+      isModalOpen: true
+    })
   };
 
   closeModalHandler = () => {
     this.setState({
-      isModalOpen: false,
-    });
+      isModalOpen: false
+    })
+  };
+
+  showModalTransHandler = () => {
+    this.setState({
+      isModalCSSTransOpen: true
+    })
+  };
+
+  closeModalTransHandler = () => {
+    this.setState({
+      isModalCSSTransOpen: false
+    })
   };
 
   containerHandler = () => {
@@ -82,9 +96,14 @@ class App extends Component {
         </Transition>
         {/*The Modal Component with Transition Component will be always present in App.js no need to apply condition here*/}
         <Modal show={this.state.isModalOpen} closed={this.closeModalHandler} />
-        {this.state.isModalOpen ? (
-          <Backdrop show={this.state.isModalOpen} />
+        <ModalCSSTransition
+          show={this.state.isModalCSSTransOpen}
+          closed={this.closeModalTransHandler} />
+
+        {this.state.isModalOpen || this.state.isModalCSSTransOpen ? (
+          <Backdrop show />
         ) : null}
+
         <button
           className="Button"
           style={{
@@ -93,6 +112,16 @@ class App extends Component {
           onClick={this.showModalHandler}
         >
           Open Modal
+        </button>
+        <br />
+        <button
+          className="Button"
+          style={{
+            marginTop: 10,
+          }}
+          onClick={this.showModalTransHandler}
+        >
+          Open Modal CSS Transition
         </button>
         <h3>Animating Lists</h3>
         <List />
