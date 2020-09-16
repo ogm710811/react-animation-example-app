@@ -28,26 +28,26 @@ class App extends Component {
 
   showModalHandler = () => {
     this.setState({
-      isModalOpen: true
-    })
+      isModalOpen: true,
+    });
   };
 
   closeModalHandler = () => {
     this.setState({
-      isModalOpen: false
-    })
+      isModalOpen: false,
+    });
   };
 
   showModalTransHandler = () => {
     this.setState({
-      isModalCSSTransOpen: true
-    })
+      isModalCSSTransOpen: true,
+    });
   };
 
   closeModalTransHandler = () => {
     this.setState({
-      isModalCSSTransOpen: false
-    })
+      isModalCSSTransOpen: false,
+    });
   };
 
   containerHandler = () => {
@@ -98,7 +98,8 @@ class App extends Component {
         <Modal show={this.state.isModalOpen} closed={this.closeModalHandler} />
         <ModalCSSTransition
           show={this.state.isModalCSSTransOpen}
-          closed={this.closeModalTransHandler} />
+          closed={this.closeModalTransHandler}
+        />
 
         {this.state.isModalOpen || this.state.isModalCSSTransOpen ? (
           <Backdrop show />
