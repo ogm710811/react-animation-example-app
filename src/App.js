@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Transition } from "react-transition-group";
+import { Motion, spring } from "react-motion";
 
 import "./App.css";
 import Modal from "./components/Modal/Modal";
@@ -24,6 +25,7 @@ class App extends Component {
     isModalOpen: false,
     isModalCSSTransOpen: false,
     openContainer: false,
+    motionAnimateElement: false,
   };
 
   showModalHandler = () => {
@@ -53,6 +55,12 @@ class App extends Component {
   containerHandler = () => {
     this.setState((prevState) => ({
       openContainer: !prevState.openContainer,
+    }));
+  };
+
+  motionAnimateElementHandler = () => {
+    this.setState((prevState) => ({
+      motionAnimateElement: !prevState.motionAnimateElement,
     }));
   };
 
@@ -126,6 +134,37 @@ class App extends Component {
         </button>
         <h3>Animating Lists</h3>
         <List />
+        <br />
+        <h3>Animating Element using React-Motion</h3>
+        <button
+          className="Button"
+          style={{
+            marginTop: 10,
+          }}
+          onClick={this.motionAnimateElementHandler}
+        >
+          Click to Animate Element
+        </button>
+        <Motion
+          defaultStyle={{ x: -200, opacity: 0 }}
+          style={{
+            x: spring(this.state.motionAnimateElement ? 0 : -200),
+            opacity: spring(this.state.motionAnimateElement ? 1 : 0),
+          }}
+        >
+          {(style) => (
+            <div
+              style={{
+                marginLeft: 20,
+                backgroundColor: "red",
+                width: 100,
+                height: 300,
+                transform: `translateX(${style.x}px)`,
+                opacity: style.opacity,
+              }}
+            />
+          )}
+        </Motion>
       </div>
     );
   }
